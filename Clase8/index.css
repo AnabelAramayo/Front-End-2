@@ -1,0 +1,38 @@
+body{
+    background-color: gainsboro;
+}
+            
+nav a{
+    text-decoration:none;
+    color:inherit;
+    font-size:14px;
+} 
+nav li{
+    display:inline-block;
+    width:10%;
+    padding:5px 10px;
+    text-align:center;
+    color:black;
+}
+nav li:hover{
+    background-color:#fff;
+    color:#000;
+}
+
+.noticia{
+    width:100%;
+    height:auto;
+    background-color:white;
+    border-radius:5px;
+    padding:10px;
+    margin-top:10px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.imgNoticia{
+    width:100%;
+    height:auto;
+    border-radius:5px;
+}
