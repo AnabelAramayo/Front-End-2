@@ -41,30 +41,56 @@ const baseDeDatos = {
 // 3) Durante el tiempo indicado anteriormente, se deberá mostrar el mensaje "Iniciando sesión..."
 
 let buttonLogin = document.querySelector('.login-btn');
-let loading = document.querySelector('#loader');
-
-// function login() {
-//   buttonLogin.addEventListener('click', function () {
-//     loading.classList.remove('hidden')
-//     setTimeout(function () {
-//       loading.classList.add('hidden')
-//     }, 3000)
-//   })
-// }
-
 let emailInput = document.querySelector('#email-input');
+let passwordInput = document.querySelector('#password-input')
+
+let loading = document.querySelector('#loader');
+let divError = document.querySelector('#error-container');
+let small = document.createElement('small');
+divError.appendChild(small);
+
+let expReg= /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+
+
 
 buttonLogin.addEventListener('click', function (e) {
-  if (emailInput.value == "") {
-    alert('Debes completar el email')
-    e.preventDefault();
-  } else {
-    loading.classList.remove('hidden')
-    setTimeout(function () {
-      loading.classList.add('hidden')
-    }, 3000)
+  for (let i of baseDeDatos.usuarios) {
+    // let esValido = expReg.test(i.email);
+    if (emailInput.value == "" || emailInput.value != (i.email) || passwordInput.value != (i.password)) {
+      divError.classList.remove('hidden')
+      small.innerHTML = `Alguno de los datos ingresados son incorrectos`;
+      e.preventDefault();
+    } else {
+      loading.classList.remove('hidden')
+      divError.classList.add('hidden')
+      console.log(divError.classList.contains('hidden')); //lo contiene pero no lo oculta!
+      setTimeout(function () {
+        loading.classList.add('hidden')
+      }, 3000)
+    }
   }
 })
+
+
+function emailValidation () {
+return expReg.test(emailInput.value);
+
+  // let esValido = expReg.test(emailInput.value);
+  // if (esValido==false){
+  //   console.log('no es valido');
+  // } else {
+  //   console.log('es valido')
+  // }
+}
+
+
+
+function passwordValidation() {
+  return passwordInput.value.trim().length >= 5;
+}
+
+
+
 
 
 // 4) A partir de los inputs ingresados en el formulario, se deberan realizar las siguientes validaciones:
